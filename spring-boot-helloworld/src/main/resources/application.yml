@@ -1,0 +1,29 @@
+student:
+  name: zs
+  age: 22
+  hobbies:
+    - 吃奥利给
+    - 秘制小汉堡
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /springboot
+#spring:
+#  profiles:
+#    active: dev
+#---
+#server:
+#  port: 8083
+#spring:
+#  profiles: test
+#---
+#server:
+#  port: 8888
+#spring:
+#  profiles: dev
+spring:
+  http:
+    encoding:
+      charset: UTF-8

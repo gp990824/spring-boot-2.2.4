@@ -1,0 +1,18 @@
+spring:
+  datasource:
+      username: scott
+      password: tiger
+      url: jdbc:oracle:thin:@localhost:1521:ORCL
+      driver-class-name: oracle.jdbc.OracleDriver
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+        max-active: 20
+        initial-size: 5
+
+server:
+  servlet:
+    context-path: /ibatis
+
+mybatis:
+  config-location: classpath:mybatis.xml
+  mapper-locations: classpath:mapper/*.xml

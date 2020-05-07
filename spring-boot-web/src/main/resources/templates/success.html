@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>成功</title>
+</head>
+<body>
+<h1>请求成功!</h1>
+<!--thymeleaf语法规则
+    th:任意HTML属性
+    ${}:OGNL,*{}:配合${}一起使用,@{}:定制url,#{}:国际化},~{}-->
+<h2 th:text="${test}"/>
+<hr/>
+<!--thymeleaf的行内写法-->
+<h2>[[${test}]]</h2>
+<hr/>
+<!--thymeleaf的遍历集合使用-->
+<h3 th:each="lb: ${laoba}" th:text="${lb}"/>
+</body>
+</html>
