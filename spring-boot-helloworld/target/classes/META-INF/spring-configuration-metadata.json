@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "name": "student",
+      "type": "com.gp.springboot.bean.Student",
+      "sourceType": "com.gp.springboot.bean.Student"
+    }
+  ],
+  "properties": [
+    {
+      "name": "student.age",
+      "type": "java.lang.Integer",
+      "sourceType": "com.gp.springboot.bean.Student",
+      "defaultValue": 0
+    },
+    {
+      "name": "student.hobbies",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.gp.springboot.bean.Student"
+    },
+    {
+      "name": "student.name",
+      "type": "java.lang.String",
+      "sourceType": "com.gp.springboot.bean.Student"
+    }
+  ],
+  "hints": []
+}
