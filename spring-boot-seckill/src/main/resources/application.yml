@@ -1,0 +1,31 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /seckill
+
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.103.203.100:3306/scott?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: '0511'
+  thymeleaf:
+    cache: false
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  level:
+    com:
+      gp:
+        springboot:
+          dao: debug
