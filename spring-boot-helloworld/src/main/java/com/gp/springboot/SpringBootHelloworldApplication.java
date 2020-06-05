@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ImportResource;
 
 /**
  * 主程序类,springboot应用的入口
- * @SpringBootApplication 有几个重要注解:
+ * @SpringBootApplication 他是一个组合注解, 有以下几个注解组成:
  *      @SpringBootConfiguration :标注在某个类上,表示这是一个springboot的配置类
  *          @Configuration : 属于spring的注解 , 配置类上来标注这个注解
  *              配置类:用于配置文件,其实也是ioc容器中的一个组件@Component

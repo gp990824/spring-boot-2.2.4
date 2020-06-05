@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 //拦截器
 public class LoginHandlerInterceptor implements HandlerInterceptor {
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String result = (String) request.getSession().getAttribute("result");

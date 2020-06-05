@@ -70,10 +70,10 @@
                         <td th:text="${emp.gender}==0?'女':'男'"/>
                         <td th:text="${emp.department.departmentName}"/>
                         <td>
-                            <a th:href="@{/emp/} + ${emp.id}">
+                            <a th:href="emp/ + ${emp.id}">
                                 <button class="btn btn-sm btn-primary">编辑</button>
                             </a>
-							<button class="btn btn-sm btn-danger" id="deleteEmp" th:attr="uri=@{/emp/} + ${emp.id}">删除</button>
+							<button class="btn btn-sm btn-danger" id="deleteEmp" th:attr="uri='/emp/' + ${emp.id}">删除</button>
                         </td>
                     </tr>
                     </tbody>
