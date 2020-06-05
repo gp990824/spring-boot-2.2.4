@@ -57,10 +57,10 @@ public class OrderServiceImpl implements OrderService {
      * @param md5 URL地址校验, 一个请求对应只有唯一的MD5值
      * @return
      */
-    @Transactional
+    @Transactional(rollbackFor = DuplicateKeyException.class)
     @Override
     public CommonResult<Commodity> excuteSeckill(Integer id, String md5, Long phone) {
-        CommonResult<Commodity> result;
+        CommonResult<Commodity> result = null;
         Commodity commodity;
         if (md5 == null || "".equals(md5) || !md5.equals(MD5Utils.getMD5ByCommodityById(id))) {
             return new CommonResult<>(false, "请不要使用脚本提交数据!");
@@ -77,18 +77,16 @@ public class OrderServiceImpl implements OrderService {
         commodity = commodityDao.queryCommodityById(id);
         Order order = new Order(commodity.getCostPrice(), phone, new Date(), (short) 1);
         order.setCommodity(commodity);
-        boolean isAddOrder;
+        boolean addSuccess = false;
         try {
-            //出现重复秒杀, 直接抛出异常, 回滚事务
-            isAddOrder = orderDao.addOrder(order);
+            addSuccess = orderDao.addOrder(order);
+            if (addSuccess) {
+                return new CommonResult<>(true, "秒杀成功!");
+            }
+            return new CommonResult<>(false, "增加订单失败!");
         } catch (DuplicateKeyException e) {
-            logger.debug("重复订单");
-            isAddOrder = false;
+            //如果增加订单信息出错, 直接抛出异常, 事务回滚
+            throw e;
         }
-        if (!isAddOrder) {
-            return new CommonResult<>(false, "重复订单, 请勿多次秒杀!");
-        }
-        result = new CommonResult<>(true, "秒杀成功!");
-        return result;
     }
 }

@@ -6,6 +6,8 @@ import com.gp.springboot.entity.Order;
 import com.gp.springboot.entity.User;
 import com.gp.springboot.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +63,13 @@ public class OrderController {
             return "error";
         }
         User user = (User) request.getSession().getAttribute("user");
-        CommonResult<Commodity> result = orderService.excuteSeckill(id, md5, user.getPhone());
+        CommonResult<Commodity> result = null;
+        try {
+            result = orderService.excuteSeckill(id, md5, user.getPhone());
+        } catch (DuplicateKeyException e) {
+            request.setAttribute("message", "同一用户同一件商品只能秒杀一次!");
+            return "error";
+        }
         if (result.isSuccess()) {
             return "success";
         } else {
