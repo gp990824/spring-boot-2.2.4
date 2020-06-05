@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>登录页面</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+          charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="text/html" charset="utf-8" http-equiv="content-type">
+    <link rel="stylesheet" media="screen" th:href="@{/css/login.css}">
+    <link rel="stylesheet" media="screen" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" media="screen" th:href="@{/js/bootstrap.min.js}">
+</head>
+<body>
+<!-- particles.js container -->
+<div id="particles-js" style="display: flex;align-items: center;justify-content: center">
+</div>
+<div class="login-page">
+    <div class="login-content">
+        <div class="login-tit">登录</div>
+        <form th:action="@{/login}" action="login" method="post" name="loginForm">
+            <div class="login-input">
+                <input type="text" placeholder="用户名" name="userName" id="userName"/>
+            </div>
+            <div class="login-input">
+                <input type="password" placeholder="密码" name="passWord" id="passWord"/>
+            </div>
+            <div class="login-btn">
+                <div class="login-btn-left">
+                    <input class="btn btn-info" type="button" value="登录" onclick="login()"/>
+                </div>
+                <div class="login-btn-right" onClick="changeImg()">
+                    <img th:src="@{img/check.png}" alt="" id="picture"> 记住密码
+                </div>
+            </div>
+            <p style="color:red; text-align: center" th:text="${message}" th:if="${not #strings.isEmpty(message)}"></p>
+        </form>
+    </div>
+</div>
+
+<script th:src="@{js/particles.js}"></script>
+<script th:src="@{js/app.js}"></script>
+<script>
+    function changeImg() {
+        let pic = document.getElementById('picture');
+        console.log(pic.src)
+        if (pic.getAttribute("src", 2) == "img/check.png") {
+            pic.src = "img/checked.png"
+        } else {
+            pic.src = "img/check.png"
+        }
+    }
+
+    function login() {
+        var userName = document.getElementById("userName").value;
+        var passWord = document.getElementById("passWord").value;
+        if (userName == "") {
+            alert("用户名不能为空!")
+            userName.focus();
+            return false;
+        }
+        if (passWord == "") {
+            alert("请填写密码!")
+            passWord.focus();
+            return false;
+        }
+        document.loginForm.submit();
+    }
+</script>
+</body>
+</html>

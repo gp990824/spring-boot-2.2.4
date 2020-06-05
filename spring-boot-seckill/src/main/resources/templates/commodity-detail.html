@@ -1,0 +1,55 @@
+<!--
+@author  Gp
+@create  2020/6/4 21:37
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+          charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+<div style="max-width: 1000px; margin: 0 auto;">
+    <h1>商品详情</h1>
+    <p>
+    <h3 th:text="${url.commodity.title}"></h3></p>
+    <p><img th:src="${url.commodity.img}"/></p>
+    <p>原价 : ￥ <span th:text="${url.commodity.price}"></span> &nbsp;&nbsp;&nbsp;&nbsp;限时特价 ： ￥ <span
+            th:text="${url.commodity.costPrice}"></span></p>
+    <p>剩余库存 : <span th:text="${url.commodity.stockCount}"></span></p>
+    <p>秒杀开始时间 : <span th:text="${#dates.format(url.commodity.startTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+    <p>秒杀结束时间 : <span th:text="${#dates.format(url.commodity.endTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+    <p th:if="${url.currentTime} > ${url.commodity.startTime} and ${url.currentTime} < ${url.commodity.endTime}">
+        <button class="btn btn-danger" id="seckillBtn"
+                th:attr="uri=@{/order/excute/}+${url.commodity.id}+'/'+${url.md5}">
+            立即秒杀
+        </button>
+    </p>
+    <p th:if="${url.currentTime} < ${url.commodity.startTime}">
+        <button class="btn btn-info">秒杀尚未开始!</button>
+    </p>
+    <p th:if="${url.currentTime} > ${url.commodity.endTime}">
+        <button class="btn btn-info">秒杀时间已过!</button>
+    </p>
+</div>
+<form id="seckillForm" method="post">
+    <input type="hidden" name="_method" value="post"/>
+</form>
+
+<script type="text/javascript" src="js/jquery-3.2.1.slim.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script language="JavaScript">
+    $("#seckillBtn").click(function () {
+        $("#seckillForm").attr("action", $(this).attr("uri")).submit();
+        return false;
+    })
+</script>
+</body>
+
+</html>

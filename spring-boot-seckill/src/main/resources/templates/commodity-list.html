@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>秒杀商品列表页</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+      charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div  style="max-width: 1000px; margin: 0 auto; text-align: center"><h1 style="color: red">商品秒杀列表</h1></div>
+<div style="max-width: 1000px; margin: 0 auto;">
+    <table class="table table-bordered table-hover" style="text-align: center;">
+        <tr>
+            <td>商品名称</td>
+            <td>原价</td>
+            <td>秒杀特价</td>
+            <td>剩余库存</td>
+            <td>开始时间</td>
+            <td>详情</td>
+        </tr>
+        <tr th:each="var:${commodities}">
+            <td th:text="${var.title}"></td>
+            <td th:text="${var.price}"></td>
+            <td th:text="${var.costPrice}"></td>
+            <td th:text="${var.stockCount}"></td>
+            <td th:text="${#dates.format(var.startTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td><a th:href="@{/commodity/seckill-url/} + ${var.id}">
+                <button class="btn btn-danger" id="seckillBtn">立即抢购</button>
+            </a></td>
+        </tr>
+    </table>
+</div>
+
+<div  style="max-width: 1000px; margin: 0 auto;text-align: center"><h3 style="color: red">基于SpringBoot的秒杀项目</h3></div>
+</body>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</html>

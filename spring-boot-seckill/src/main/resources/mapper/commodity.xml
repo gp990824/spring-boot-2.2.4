@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.springboot.dao.CommodityDao">
+    <resultMap id="commodity" type="com.gp.springboot.entity.Commodity">
+        <id property="id" column="id" />
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="image" property="img"/>
+        <result property="costPrice" column="cost_price" jdbcType="DECIMAL"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result property="stockCount" column="stock_count" />
+    </resultMap>
+
+    <select id="queryAllCommodity" resultMap="commodity">
+        select * from seckill_commodity
+    </select>
+
+    <select id="queryCommodityById" resultMap="commodity">
+        select * from seckill_commodity where id = #{id}
+    </select>
+
+    <update id="updateCommodity" >
+        update seckill_commodity set stock_count = stock_count - 1 where id = #{id}
+    </update>
+
+    <select id="queryStockCountById" resultType="java.lang.Integer" >
+        select stock_count from seckill_commodity where id = #{id}
+    </select>
+</mapper>

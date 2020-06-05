@@ -1,0 +1,21 @@
+<!--
+@author  Gp
+@create  2020/6/5 9:52
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>500</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+          charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h1>程序出错! 请联系管理员! 请查看错误信息:</h1>
+<h3>出错时间 : [[${#dates.format(timestamp, 'yyyy-MM-dd HH:mm:ss')}]]</h3>
+<h3>异常日志 : [[${message}]]</h3>
+<h3>出错路径 : [[${path}]]</h3>
+</body>
+</html>

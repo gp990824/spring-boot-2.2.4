@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gp.springboot.dao.OrderDao">
+    <resultMap id="order" type="com.gp.springboot.entity.Order">
+        <id column="id" property="id" />
+        <result column="money" property="money" jdbcType="DECIMAL"/>
+        <result column="user_phone" property="phone" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <association property="commodity" column="commodity_id"
+        select="com.gp.springboot.dao.CommodityDao.queryCommodityById"></association>
+    </resultMap>
+    <select id="queryAllOrder" resultMap="order">
+        select * from seckill_order
+    </select>
+
+    <select id="queryOrderById" resultMap="order">
+        select * from seckill_order where id = #{id}
+    </select>
+
+    <insert id="addOrder" parameterType="com.gp.springboot.entity.Order">
+        insert into seckill_order(money,user_phone,create_time,status,commodity_id)
+        values(#{money},#{phone},#{createTime},#{status},#{commodity.id})
+    </insert>
+</mapper>

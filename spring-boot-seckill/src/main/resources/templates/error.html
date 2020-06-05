@@ -1,0 +1,15 @@
+<!--
+@author  Gp
+@create  2020/6/4 21:09
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>出错啦</title>
+</head>
+<body>
+<h1>出错啦! 如有问题请联系管理员! 请查看错误信息!</h1>
+<h2 th:text="${message}" th:if="${not #strings.isEmpty(message)}"></h2>
+</body>
+</html>
